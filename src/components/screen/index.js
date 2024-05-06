@@ -4,20 +4,38 @@ const Screen = () => {
     const [activeNumber, setActiveNumber] = useState(0);
     const [score, setScore] = useState(0);
     const [time, setTime] = useState(60);
+    const [status, setStatus] = useState("Stopped");
     let number = 6;
     let balls = [];
     for (let a = 1; a <= number; a++) {
         balls.push(a);
     }
+    const startGame = () => {
+        setStatus("playing");
+        document.getElementById("screen").style.display = "flex";
+        document.getElementById("settings").style.display = "none";
+        let timer = setInterval(() => {
+            setTime((time) => {
+                if (time === 0) {
+                    clearInterval(timer);
+                    document.getElementById("screen").style.display = "none";
+                    document.getElementById("settings").style.display = "flex";
+                    return 0;
 
+                } else return time - 1;
+            });
+        }, 1000);
+    }
     const checkNumber = (id) => {
         if (time > 0) {
             if (id == activeNumber) {
                 generateNumber(1, number);
                 setScore(score + 1);
-                new Audio('./correct.mp3').play()
-            }else{
-                new Audio('./error.mp3').play()
+               // new Audio('./correct.mp3').play()
+               document.getElementById('audioCorrect').play();
+            } else {
+                //new Audio('./error.mp3').play()
+                document.getElementById('audioWrong').play();
             }
         }
     }
@@ -45,34 +63,32 @@ const Screen = () => {
 
     useEffect(() => {
         generateNumber(1, number);
-
-
-
     }, [])
 
 
 
     useEffect(() => {
-        let timer = setInterval(() => {
-            setTime((time) => {
-                if (time === 0) {
-                    clearInterval(timer);
-                    document.getElementById("screen").style.display = "none";
-                    return 0;
-
-                } else return time - 1;
-            });
-        }, 1000);
+        //
+     
     }, []);
     return (
         <div className='bg-white w-full h-screen'>
-            <div className='font-bold text-slate-700 px-6 py-2 bg-slate-400 rounded-b-xl shadow-xl '>Punts: {score} -  Temps: {time}</div>
-            <div className='flex flex-wrap h-screen' id="screen">
+            <div className='font-bold text-slate-700 px-6 py-2 bg-slate-400 rounded-b-xl shadow-xl '>Punts: {score} -  Temps: {time} </div>
+
+            <div className=' flex flex-wrap h-screen w-full justify-center items-center ' id="settings">
+                <button className='rounded-full bg-slate-700 text-white p-12 font-bold shadow-xl' onClick={startGame}>Start</button>
+            </div>
+            <div className='hidden flex flex-wrap h-screen' id="screen">
                 {balls.map((b) => {
                     return (<Ball setActiveNumber={setActiveNumber} checkNumber={checkNumber} key={b} id={b}></Ball>)
                 })}
-
             </div>
+            <audio id="audioCorrect">
+                <source src="./correct.mp3"></source>
+            </audio>
+            <audio id="audioWrong">
+                <source src="./error.mp3"></source>
+            </audio>
         </div>
     )
 }
