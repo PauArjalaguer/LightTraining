@@ -18,8 +18,10 @@ const Screen = () => {
         setScore(0);
         setStatus("playing");
         setInitialTime(time);
+        setRate(1);
         document.getElementById("screen").style.display = "flex";
         document.getElementById("settings").style.display = "none";
+        document.getElementById("dashboard").style.display = "flex";
         let timer = setInterval(() => {
             setTime((time) => {
                 if (time === 0) {
@@ -97,17 +99,14 @@ const Screen = () => {
     }, []);
     return (
         <div className='bg-white w-full h-screen' id="body">
-            <div className='font-bold text-slate-700 px-6 py-5 bg-slate-400 rounded-b-xl shadow-xl '>Punts: {score} -  Temps: {time} - Ratio: {rate}</div>
-
+            <div id="dashboard" className='hidden font-bold text-slate-700 px-6 py-2 bg-slate-400 rounded-b-xl shadow-xl '>Punts: {score} -  Temps: {time} - Ratio: {rate} pulsacions per segon.</div>
             <div className=' flex flex-wrap h-screen w-full justify-center items-center' id="settings">
                 <div className="block justify-center">
                     <div className=' rounded-xl p-2 font-bold text-slate-700 flex justify-center border-2  items-center'>
                         Temps de joc: &nbsp;<input size="5" className='bg-slate-300 w-1/4 text-center rounded-full text-slate-700 p-4' type="number" value={time} onChange={(e) => { setTime(e.target.value) }}></input>
                     </div>
-                  
-
                     <div className=' p-6 flex justify-center'>
-                        <button className='rounded-full bg-slate-700 text-white p-12 font-bold shadow-xl' onClick={startGame}>Start</button>
+                        <button className='rounded-full bg-slate-700 text-white p-12 font-bold shadow-xl' onClick={startGame}>Començar</button>
                     </div>
                 </div>
             </div>
