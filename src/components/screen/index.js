@@ -14,6 +14,7 @@ const Screen = () => {
         balls.push(a);
     }
     const startGame = () => {
+        document.getElementById("body").requestFullscreen();
         setScore(0);
         setStatus("playing");
         setInitialTime(time);
@@ -43,6 +44,8 @@ const Screen = () => {
                 let calcRate = (score / (initialTime - time)).toString().substring(0, 3);
                 setRate(calcRate);
             } else {
+                document.getElementById('audioCorrect').pause();
+                document.getElementById('audioCorrect').currentTime = 0;
                 document.getElementById('audioWrong').play();
             }
         }
@@ -93,7 +96,7 @@ const Screen = () => {
 
     }, []);
     return (
-        <div className='bg-white w-full h-screen'>
+        <div className='bg-white w-full h-screen' id="body">
             <div className='font-bold text-slate-700 px-6 py-2 bg-slate-400 rounded-b-xl shadow-xl '>Punts: {score} -  Temps: {time} - Ratio: {rate}</div>
 
             <div className=' flex flex-wrap h-screen w-full justify-center items-center' id="settings">
@@ -113,7 +116,7 @@ const Screen = () => {
                 })}
             </div>
             <audio id="audioCorrect">
-                <source src="./correct.mp3"></source>
+                <source  src="./correct.mp3"></source>
             </audio>
             <audio id="audioWrong">
                 <source src="./error.mp3"></source>
