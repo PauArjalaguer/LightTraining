@@ -7,7 +7,7 @@ const Screen = () => {
     const [status, setStatus] = useState("Stopped");
     const [initialTime, setInitialTime] = useState(60);
     const [rate, setRate] = useState(0);
-    const [activeColor, setActiveColor]= useState("");
+    const [activeColor, setActiveColor] = useState("");
     let number = 6;
     let balls = [];
     for (let a = 1; a <= number; a++) {
@@ -54,23 +54,23 @@ const Screen = () => {
         let colors = [null, 'bg-blue-200', 'bg-blue-300', 'bg-blue-400', 'bg-blue-500', 'bg-blue-600', 'bg-blue-800'];
         if (rate >= 1.5) {
             console.log(rate);
-             colors = [null, 'bg-green-200', 'bg-green-300', 'bg-green-400', 'bg-green-500', 'bg-green-600', 'bg-green-800'];
+            colors = [null, 'bg-green-200', 'bg-green-300', 'bg-green-400', 'bg-green-500', 'bg-green-600', 'bg-green-800'];
         } else if (rate >= 1) {
             console.log(rate);
-             colors = [null, 'bg-blue-200', 'bg-blue-300', 'bg-blue-400', 'bg-blue-500', 'bg-blue-600', 'bg-blue-800'];
+            colors = [null, 'bg-blue-200', 'bg-blue-300', 'bg-blue-400', 'bg-blue-500', 'bg-blue-600', 'bg-blue-800'];
         } else {
             console.log(rate);
-             colors = [null, 'bg-red-200', 'bg-red-300', 'bg-red-400', 'bg-red-500', 'bg-red-600', 'bg-red-800'];
+            colors = [null, 'bg-red-200', 'bg-red-300', 'bg-red-400', 'bg-red-500', 'bg-red-600', 'bg-red-800'];
         }
         console.log(colors);
         if (activeNumber != 0) {
-         /*    document.getElementById("ball_" + activeNumber).classList.add("bg-slate-100");
-            document.getElementById("ball_" + activeNumber).classList.remove("bg-blue-200");
-            document.getElementById("ball_" + activeNumber).classList.remove("bg-blue-300");
-            document.getElementById("ball_" + activeNumber).classList.remove("bg-blue-400");
-            document.getElementById("ball_" + activeNumber).classList.remove("bg-blue-500");
-            document.getElementById("ball_" + activeNumber).classList.remove("bg-blue-600");
-            document.getElementById("ball_" + activeNumber).classList.remove("bg-blue-800"); */
+            /*    document.getElementById("ball_" + activeNumber).classList.add("bg-slate-100");
+               document.getElementById("ball_" + activeNumber).classList.remove("bg-blue-200");
+               document.getElementById("ball_" + activeNumber).classList.remove("bg-blue-300");
+               document.getElementById("ball_" + activeNumber).classList.remove("bg-blue-400");
+               document.getElementById("ball_" + activeNumber).classList.remove("bg-blue-500");
+               document.getElementById("ball_" + activeNumber).classList.remove("bg-blue-600");
+               document.getElementById("ball_" + activeNumber).classList.remove("bg-blue-800"); */
             document.getElementById("ball_" + activeNumber).classList.remove(activeColor);
 
         }
@@ -97,13 +97,14 @@ const Screen = () => {
     }, []);
     return (
         <div className='bg-white w-full h-screen' id="body">
-            <div className='font-bold text-slate-700 px-6 py-2 bg-slate-400 rounded-b-xl shadow-xl '>Punts: {score} -  Temps: {time} - Ratio: {rate}</div>
+            <div className='font-bold text-slate-700 px-6 py-5 bg-slate-400 rounded-b-xl shadow-xl '>Punts: {score} -  Temps: {time} - Ratio: {rate}</div>
 
             <div className=' flex flex-wrap h-screen w-full justify-center items-center' id="settings">
                 <div className="block justify-center">
-                    <div className=' rounded-xl p-2 font-bold text-slate-700 flex justify-center border-2 '>
-                        Temps &nbsp;<input className='bg-transparent w-1/4' type="number" value={time} onChange={(e) => { setTime(e.target.value) }}></input>
+                    <div className=' rounded-xl p-2 font-bold text-slate-700 flex justify-center border-2  items-center'>
+                        Temps de joc: &nbsp;<input size="5" className='bg-slate-300 w-1/4 text-center rounded-full text-slate-700 p-4' type="number" value={time} onChange={(e) => { setTime(e.target.value) }}></input>
                     </div>
+                  
 
                     <div className=' p-6 flex justify-center'>
                         <button className='rounded-full bg-slate-700 text-white p-12 font-bold shadow-xl' onClick={startGame}>Start</button>
@@ -116,7 +117,7 @@ const Screen = () => {
                 })}
             </div>
             <audio id="audioCorrect">
-                <source  src="./correct.mp3"></source>
+                <source src="./correct.mp3"></source>
             </audio>
             <audio id="audioWrong">
                 <source src="./error.mp3"></source>
