@@ -21,7 +21,6 @@ const Screen = () => {
                     document.getElementById("screen").style.display = "none";
                     document.getElementById("settings").style.display = "flex";
                     return 0;
-
                 } else return time - 1;
             });
         }, 1000);
@@ -31,8 +30,8 @@ const Screen = () => {
             if (id == activeNumber) {
                 generateNumber(1, number);
                 setScore(score + 1);
-               // new Audio('./correct.mp3').play()
-               document.getElementById('audioCorrect').play();
+                // new Audio('./correct.mp3').play()
+                document.getElementById('audioCorrect').play();
             } else {
                 //new Audio('./error.mp3').play()
                 document.getElementById('audioWrong').play();
@@ -69,14 +68,22 @@ const Screen = () => {
 
     useEffect(() => {
         //
-     
+
     }, []);
     return (
         <div className='bg-white w-full h-screen'>
             <div className='font-bold text-slate-700 px-6 py-2 bg-slate-400 rounded-b-xl shadow-xl '>Punts: {score} -  Temps: {time} </div>
 
-            <div className=' flex flex-wrap h-screen w-full justify-center items-center ' id="settings">
-                <button className='rounded-full bg-slate-700 text-white p-12 font-bold shadow-xl' onClick={startGame}>Start</button>
+            <div className=' flex flex-wrap h-screen w-full justify-center items-center' id="settings">
+                <div className="block justify-center">
+                    <div className=' rounded-xl p-2 font-bold text-slate-700 flex justify-center border-2 '>
+                        Temps &nbsp;<input className='bg-transparent w-1/4' type="number" value={time} onChange={(e) => { setTime(e.target.value) }}></input>
+                    </div>
+
+                    <div className=' p-6 flex justify-center'> 
+                    <button className='rounded-full bg-slate-700 text-white p-12 font-bold shadow-xl' onClick={startGame}>Start</button>
+                    </div>
+                </div>
             </div>
             <div className='hidden flex flex-wrap h-screen' id="screen">
                 {balls.map((b) => {
